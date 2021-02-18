@@ -6,6 +6,7 @@ class PerformancesController < ApplicationController
   end
 
   def new
+    @performance = Performance.new
   end
 
   def edit
