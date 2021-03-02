@@ -31,9 +31,11 @@ class PerformancesController < ApplicationController
 
 
   def destroy
-    performance = Performance.find()params[:id]
+    performance = Performance.find(params[:id])
     performance.destroy
     redirect_to performances_path
+  end
+  
 
   private
   def performance_params
