@@ -48,4 +48,12 @@
   </div>
 </section>
 
+
+<%= @user.performances.each do |perform|%>
+  <%= attachment_image_tag perform, :image%>
+  <%= link_to "詳細", performance_path(perform) %>
+  <%= link_to "編集", edit_performance_path(perform) %>
+  <%= link_to "削除", performance_path(perform), method: :delete, data: {confirm: "削除しますか？"} %>
+
+<%end%>
 公演情報は後ほど
