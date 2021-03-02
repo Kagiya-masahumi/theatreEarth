@@ -30,6 +30,11 @@ class PerformancesController < ApplicationController
   end
 
 
+  def destroy
+    performance = Performance.find()params[:id]
+    performance.destroy
+    redirect_to performances_path
+
   private
   def performance_params
     params.require(:performance).permit(:title, :body, :image)
