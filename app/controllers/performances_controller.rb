@@ -1,4 +1,6 @@
 class PerformancesController < ApplicationController
+  before_action :authenticate_user!,except: [:index]
+
   def index
     @performances = Performance.all
   end
@@ -13,20 +15,30 @@ class PerformancesController < ApplicationController
 
   def edit
     @performance = Performance.find(params[:id])
+    if @performance.user != current_user
+      redirect_to performances_path, alert: "不正なアクセスです。"
+    end
 
   end
 
   def create
     @performance = Performance.new(performance_params)
     @performance.user_id = current_user.id
-    @performance.save
-    redirect_to performance_path(@performance)
+    if @performance.save
+      redirect_to performance_path(@performance), notice: "投稿に成功しました。"
+    else
+      render :new
+      
+    end
   end
 
   def update
     @performance = Performance.find(params[:id])
-    @performance.update(performance_params)
-    redirect_to performance_path(@performance)
+    if @performance.update(performance_params)
+      redirect_to performance_path(@performance), notice: "更新が成功しました。"
+    else
+      render :edit
+    end
   end
 
 

@@ -8,6 +8,16 @@
   </div>
 </section>
 
+<% if @performance.errors.any? %>
+  <div class="notification is-danger">
+    <h2><%= pluralize(@performance.errors.count, "error") %> prohibited this object from being saved: not successfully</h2>
+    <ul>
+      <% @performance.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<%end%>
 
 <section class="section">
   <div class="container">
