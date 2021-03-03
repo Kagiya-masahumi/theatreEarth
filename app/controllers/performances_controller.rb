@@ -25,7 +25,7 @@ class PerformancesController < ApplicationController
     @performance = Performance.new(performance_params)
     @performance.user_id = current_user.id
     if @performance.save
-      redirect_to performance_path(@performance)
+      redirect_to performance_path(@performance), notice: "投稿に成功しました。"
     else
       render :new
       
@@ -35,7 +35,7 @@ class PerformancesController < ApplicationController
   def update
     @performance = Performance.find(params[:id])
     if @performance.update(performance_params)
-      redirect_to performance_path(@performance)
+      redirect_to performance_path(@performance), notice: "更新が成功しました。"
     else
       render :edit
     end
