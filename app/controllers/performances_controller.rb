@@ -24,14 +24,21 @@ class PerformancesController < ApplicationController
   def create
     @performance = Performance.new(performance_params)
     @performance.user_id = current_user.id
-    @performance.save
-    redirect_to performance_path(@performance)
+    if @performance.save
+      redirect_to performance_path(@performance)
+    else
+      render :new
+      
+    end
   end
 
   def update
     @performance = Performance.find(params[:id])
-    @performance.update(performance_params)
-    redirect_to performance_path(@performance)
+    if @performance.update(performance_params)
+      redirect_to performance_path(@performance)
+    else
+      render :edit
+    end
   end
 
 
