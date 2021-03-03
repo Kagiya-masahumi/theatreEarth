@@ -15,6 +15,9 @@ class PerformancesController < ApplicationController
 
   def edit
     @performance = Performance.find(params[:id])
+    if @performance.user != current_user
+      redirect_to performances_path, alert: "不正なアクセスです。"
+    end
 
   end
 
